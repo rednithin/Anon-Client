@@ -1,4 +1,5 @@
 import React, { Component } from "react";
+import { inject, observer } from "mobx-react";
 
 class App extends Component {
   render() {
@@ -6,4 +7,4 @@ class App extends Component {
   }
 }
 
-export default App;
+export default inject("store", "routing")(observer(App));

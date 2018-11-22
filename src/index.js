@@ -10,6 +10,10 @@ import App from "./App";
 import * as serviceWorker from "./serviceWorker";
 import store from "./models/store";
 
+import("../node_modules/normalize.css/normalize.css");
+import("../node_modules/@blueprintjs/icons/lib/css/blueprint-icons.css");
+import("../node_modules/@blueprintjs/core/lib/css/blueprint.css");
+
 const browserHistory = createBrowserHistory();
 const routing = new RouterStore();
 

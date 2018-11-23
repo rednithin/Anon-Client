@@ -1,0 +1,18 @@
+.container {
+  display: grid;
+  height: 100%;
+  grid-template-columns: repeat(12, 1fr);
+  grid-template-rows: 50px auto 50px;
+  grid-gap: 10px;
+}
+
+.header,
+.content,
+.footer {
+  grid-column: 1 / -1;
+}
+
+.content {
+  align-self: center;
+  justify-self: center;
+}

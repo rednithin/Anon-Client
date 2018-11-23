@@ -1,7 +1,7 @@
 import React from "react";
 import ReactDOM from "react-dom";
 import { Provider } from "mobx-react";
-import { BrowserRouter } from "react-router-dom";
+import { Router } from "react-router-dom";
 import { RouterStore, syncHistoryWithStore } from "mobx-react-router";
 import createBrowserHistory from "history/createBrowserHistory";
 
@@ -10,9 +10,9 @@ import App from "./App";
 import * as serviceWorker from "./serviceWorker";
 import store from "./models/store";
 
-import("../node_modules/normalize.css/normalize.css");
-import("../node_modules/@blueprintjs/icons/lib/css/blueprint-icons.css");
-import("../node_modules/@blueprintjs/core/lib/css/blueprint.css");
+import("normalize.css/normalize.css");
+import("@blueprintjs/icons/lib/css/blueprint-icons.css");
+import("@blueprintjs/core/lib/css/blueprint.css");
 
 const browserHistory = createBrowserHistory();
 const routing = new RouterStore();
@@ -26,9 +26,9 @@ const history = syncHistoryWithStore(browserHistory, routing);
 
 ReactDOM.render(
   <Provider {...stores}>
-    <BrowserRouter history={history}>
+    <Router history={history}>
       <App />
-    </BrowserRouter>
+    </Router>
   </Provider>,
   document.getElementById("root")
 );

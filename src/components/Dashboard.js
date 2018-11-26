@@ -1,16 +1,7 @@
 import React from "react";
 import { inject, observer } from "mobx-react";
 import { Link } from "react-router-dom";
-import {
-  Button,
-  Card,
-  Elevation,
-  H4,
-  Icon,
-  Label,
-  Text,
-  UL
-} from "@blueprintjs/core";
+import { Card, Elevation, H4, Icon, Tag, UL } from "@blueprintjs/core";
 import CopyToClipboard from "react-copy-to-clipboard";
 import { SuccessToaster } from "./Toaster";
 
@@ -40,7 +31,7 @@ const Dashboard = props =>
           <br />
           <H4>Questions</H4>
           <UL style={{ margin: "0px", padding: "0px" }}>
-            {props.store.company.questions.map(({ id, query }) => (
+            {props.store.company.questions.map(({ id, query, isPublic }) => (
               <li
                 style={{
                   listStyle: "none",
@@ -60,6 +51,12 @@ const Dashboard = props =>
                   >
                     <Icon icon="link" intent="primary" />
                   </CopyToClipboard>
+                  {isPublic ? (
+                    <Tag intent="primary">Public</Tag>
+                  ) : (
+                    <Tag minimal>Private</Tag>
+                  )}
+
                   <div style={{ margin: "5px" }}>{query}</div>
                 </div>
               </li>

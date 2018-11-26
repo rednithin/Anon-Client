@@ -43,7 +43,10 @@ class GiveResponse extends Component {
           >
             <div style={{ display: "flex", justifyContent: "space-between" }}>
               <H4>Respond to - {this.state.question.query}</H4>
-              <Icon icon="refresh" onClick={this.fetchResponses} />
+
+              {this.state.question && this.state.question.isPublic ? (
+                <Icon icon="refresh" onClick={this.fetchResponses} />
+              ) : null}
             </div>
 
             <form onSubmit={handleSubmit}>

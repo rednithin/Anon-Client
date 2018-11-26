@@ -10,6 +10,7 @@ export const ME = gql`
       questions {
         id
         query
+        isPublic
       }
     }
   }
@@ -35,6 +36,7 @@ export const SIGNUP = gql`
       questions {
         id
         query
+        isPublic
       }
     }
   }
@@ -50,6 +52,7 @@ export const SIGNIN = gql`
       questions {
         id
         query
+        isPublic
       }
     }
   }

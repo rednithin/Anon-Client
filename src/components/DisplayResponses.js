@@ -1,6 +1,8 @@
 import React, { Component } from "react";
 import { inject, observer } from "mobx-react";
 import { Link } from "react-router-dom";
+import { CSVDownload, CSVLink } from "react-csv";
+
 import {
   Button,
   Card,
@@ -45,7 +47,20 @@ class DisplayResponses extends Component {
               ? ` - ${this.state.question.query}`
               : null}
           </H4>
-          <Icon icon="refresh" onClick={this.fetchResponses} />
+          <div>
+            <Icon
+              icon="refresh"
+              intent="primary"
+              onClick={this.fetchResponses}
+              style={{ margin: "0px 5px" }}
+            />
+            <CSVLink
+              data={this.state.question ? this.state.question.responses : []}
+              separator={";"}
+            >
+              <Icon icon="download" />
+            </CSVLink>
+          </div>
         </div>
         {this.state.question && this.state.question.responses.length !== 0 ? (
           <UL style={{ margin: "0px", padding: "0px" }}>

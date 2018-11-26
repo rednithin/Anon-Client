@@ -5,9 +5,10 @@ import {
   Elevation,
   H4,
   InputGroup,
-  FormGroup
+  FormGroup,
+  Tag
 } from "@blueprintjs/core";
-import yup from "yup";
+import * as yup from "yup";
 import { withFormik } from "formik";
 import { inject, observer } from "mobx-react";
 
@@ -24,7 +25,11 @@ const Login = ({ values, handleChange, handleSubmit, errors, touched }) => (
           value={values.email}
           onChange={handleChange}
         />
-        {touched.email && errors.email && <div>errors.email</div>}
+        {touched.email && errors.email && (
+          <Tag intent="danger" minimal>
+            {errors.email}
+          </Tag>
+        )}
       </FormGroup>
       <FormGroup label="Password" labelFor="password" labelInfo="(required)">
         <InputGroup
@@ -36,7 +41,11 @@ const Login = ({ values, handleChange, handleSubmit, errors, touched }) => (
           value={values.password}
           onChange={handleChange}
         />
-        {touched.password && errors.password && <div>errors.password</div>}
+        {touched.password && errors.password && (
+          <Tag intent="danger" minimal>
+            {errors.password}
+          </Tag>
+        )}
       </FormGroup>
 
       <Button type="submit">Submit</Button>
@@ -51,16 +60,16 @@ const FormikLogin = withFormik({
       password: ""
     };
   },
-  // validationSchema: yup.object().shape({
-  //   email: yup
-  //     .string()
-  //     .email()
-  //     .required(),
-  //   password: yup
-  //     .string()
-  //     .min(8)
-  //     .required()
-  // }),
+  validationSchema: yup.object().shape({
+    email: yup
+      .string()
+      .email()
+      .required(),
+    password: yup
+      .string()
+      .min(8)
+      .required()
+  }),
   async handleSubmit(values, { props }) {
     await props.store.signin(values);
     props.routing.push("/");

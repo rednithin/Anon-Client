@@ -6,9 +6,10 @@ import {
   H4,
   TextArea,
   FormGroup,
-  Switch
+  Switch,
+  Tag
 } from "@blueprintjs/core";
-import yup from "yup";
+import * as yup from "yup";
 
 import { withFormik } from "formik";
 import { inject, observer } from "mobx-react";
@@ -27,7 +28,11 @@ const Register = ({ values, handleChange, handleSubmit, errors, touched }) => (
           value={values.query}
           onChange={handleChange}
         />
-        {touched.query && errors.query && <div>errors.query</div>}
+        {touched.query && errors.query && (
+          <Tag intent="danger" minimal>
+            {errors.query}
+          </Tag>
+        )}
       </FormGroup>
       <FormGroup
         label="Should responses be public?"
@@ -53,10 +58,13 @@ const FormikRegister = withFormik({
       isPublic: true
     };
   },
-  // validationSchema: yup.object().shape({
-  //   name: yup.string(),
-  //   isPublic: yup.boolean()
-  // }),
+  validationSchema: yup.object().shape({
+    query: yup
+      .string()
+      .min(20)
+      .required(),
+    isPublic: yup.boolean().required()
+  }),
   async handleSubmit(values, { props }) {
     console.log(values);
     await props.store.addQuestion(values);

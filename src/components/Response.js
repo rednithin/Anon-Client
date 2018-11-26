@@ -9,10 +9,11 @@ import {
   Icon,
   FormGroup,
   TextArea,
+  Tag,
   UL
 } from "@blueprintjs/core";
 import { withFormik } from "formik";
-
+import * as yup from "yup";
 class GiveResponse extends Component {
   state = {
     question: null
@@ -65,7 +66,9 @@ class GiveResponse extends Component {
                   onChange={handleChange}
                 />
                 {touched.response && errors.response && (
-                  <div>errors.response</div>
+                  <Tag intent="danger" minimal>
+                    {errors.response}
+                  </Tag>
                 )}
               </FormGroup>
               <Button type="submit">Submit</Button>
@@ -114,6 +117,12 @@ const FormikGiveResonse = withFormik({
       response: ""
     };
   },
+  validationSchema: yup.object().shape({
+    response: yup
+      .string()
+      .min(10)
+      .required()
+  }),
   async handleSubmit(values, { props }) {
     await props.store.addResponse(values);
   }

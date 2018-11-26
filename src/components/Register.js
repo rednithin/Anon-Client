@@ -6,9 +6,10 @@ import {
   H4,
   InputGroup,
   FormGroup,
-  TextArea
+  TextArea,
+  Tag
 } from "@blueprintjs/core";
-import yup from "yup";
+import * as yup from "yup";
 
 import { withFormik } from "formik";
 import { inject, observer } from "mobx-react";
@@ -26,7 +27,11 @@ const Register = ({ values, handleChange, handleSubmit, errors, touched }) => (
           value={values.name}
           onChange={handleChange}
         />
-        {touched.name && errors.name && <div>errors.name</div>}
+        {touched.name && errors.name && (
+          <Tag intent="danger" minimal>
+            {errors.name}
+          </Tag>
+        )}
       </FormGroup>
       <FormGroup label="Email" labelFor="email" labelInfo="(required)">
         <InputGroup
@@ -37,7 +42,11 @@ const Register = ({ values, handleChange, handleSubmit, errors, touched }) => (
           value={values.email}
           onChange={handleChange}
         />
-        {touched.email && errors.email && <div>errors.email</div>}
+        {touched.email && errors.email && (
+          <Tag intent="danger" minimal>
+            {errors.email}
+          </Tag>
+        )}
       </FormGroup>
       <FormGroup label="Password" labelFor="password" labelInfo="(required)">
         <InputGroup
@@ -49,7 +58,11 @@ const Register = ({ values, handleChange, handleSubmit, errors, touched }) => (
           value={values.password}
           onChange={handleChange}
         />
-        {touched.password && errors.password && <div>errors.password</div>}
+        {touched.password && errors.password && (
+          <Tag intent="danger" minimal>
+            {errors.password}
+          </Tag>
+        )}
       </FormGroup>
       <FormGroup
         label="Description"
@@ -66,7 +79,9 @@ const Register = ({ values, handleChange, handleSubmit, errors, touched }) => (
           onChange={handleChange}
         />
         {touched.description && errors.description && (
-          <div>errors.description</div>
+          <Tag intent="danger" minimal>
+            {errors.description}
+          </Tag>
         )}
       </FormGroup>
       <Button type="submit">Submit</Button>
@@ -83,18 +98,21 @@ const FormikRegister = withFormik({
       description: ""
     };
   },
-  // validationSchema: yup.object().shape({
-  //   name: yup.string(),
-  //   description: yup.string().min(5),
-  //   email: yup
-  //     .string()
-  //     .email()
-  //     .required(),
-  //   password: yup
-  //     .string()
-  //     .min(8)
-  //     .required()
-  // }),
+  validationSchema: yup.object().shape({
+    name: yup.string().required(),
+    email: yup
+      .string()
+      .email()
+      .required(),
+    password: yup
+      .string()
+      .min(8)
+      .required(),
+    description: yup
+      .string()
+      .min(20)
+      .required()
+  }),
   async handleSubmit(values, { props }) {
     console.log(values);
     await props.store.signup(values);

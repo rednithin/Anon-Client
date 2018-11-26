@@ -47,7 +47,7 @@ class DisplayResponses extends Component {
               ? ` - ${this.state.question.query}`
               : null}
           </H4>
-          <div>
+          <div style={{ width: "50px" }}>
             <Icon
               icon="refresh"
               intent="primary"

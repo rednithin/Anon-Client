@@ -67,7 +67,7 @@ const Dashboard = props =>
     </Card>
   ) : (
     <Card>
-      Welcome to Anon the best anonymous feedback site. Login or register to
+      Welcome to Anon, the best anonymous feedback site. Login or register to
       continue.
     </Card>
   );
